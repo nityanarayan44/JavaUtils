@@ -1,15 +1,29 @@
 /**
+ * @package org.nng.automation.utils
  * @author Ashutosh Mishra [@github: nityanarayan44]
  * @desc Webdriver basic functionality under "org.nng.automation.utils" package
+ * 
+ * -------------------------------------
+ * Driver Category
+ * -------------------------------------
+ * 			- Local WebDriver [Chrome | Firefox | IE | Edge]
+ * 	TODO	- Remote WebDriver[Android | IPHONE | CHROME | FIREFOX | IE | EDGE | SAFARI]
  */
 
 package org.nng.automation.utils;
 
+import java.io.File;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 
@@ -17,18 +31,41 @@ import org.testng.annotations.AfterClass;
 public class Driver {
 	
 	//=============================================================
-	// Private Variables
+	// Variables
 	//=============================================================
 		private WebDriver driver 					= null;
 		private DesiredCapabilities capabilities 	= null;
 		private ChromeOptions options				= null;
 		private String browserName					= null;
-		private String[] chromeDefaultOptions 		= {"disable-extensions", "--start-maximized"};
-		private String[] chromeIncognitoOptions 	= {"incognito","disable-extensions", "--start-maximized"};
+		private String errorMsgForWrongBrwserPassed = "\n./`ERROR`\\\\______________________________________________________________.\n| WebDriver is availble for one of these: CHROME | FIREFOX | IE | EDGE	|\n| Property is not set, hence driver(NULL) will not be initialized.	|\n+-----------------------------------------------------------------------+\n\n";
+	
+	/* 
+	 * ChromeOptions and DesiredCapabilities.
+	 * ------------------------------------------------------------
+	 */
+		public String[] defaultChromeOptions 				= {"--disable-extensions", "--start-maximized"};
+		public String[] defaultchromeOptionsWithIncognito 	= {"--incognito","--disable-extensions", "--start-maximized"};
+		public String[] IEDefaultCapabilities				= {"INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS", "IGNORE_ZOOM_SETTING"};
+		public String[] FirefoxDefaultCapabilities			= {""};
+		
+		
+	/*
+	 * -----------------------
+	 * Distructor
+	 * -----------------------
+	 */
+		@Override
+		protected void finalize() throws Throwable {
+			//super.finalize();
+			System.out.println(">>> Closing and Quiting current driver object.");
+			this.closeDriver();
+			this.quitDriver();
+		}
 		
 	//=============================================================
-	// Public: Functions [Main]
+	// Functions [Main]
 	//=============================================================
+		
 		
 		// Get a Web driver, [with no args]
 		public WebDriver getWebDriver(String browserName, String driverPath) {
@@ -45,7 +82,7 @@ public class Driver {
 			if(this.setProperty(browserName, driverPath)) { 
 				this.setDriver(browserName);
 				this.setChromeOptions(chromeOptions);
-				this.initDriver(browserName+"WithOptions");
+				this.initDriver(browserName+"_With_Options");
 			}
 			else this.driver = null;
 			// Return webdriver
@@ -57,27 +94,63 @@ public class Driver {
 			if(this.setProperty(browserName, driverPath)) { 
 				this.setDriver(browserName);
 				this.setDesiredCapabilites(capabilities);
-				this.initDriver(browserName+"WithCapabilities");
+				this.initDriver(browserName+"_With_Capabilities");
 			}
 			else this.driver = null;
 			// Return webdriver
 			return this.driver;
 		}
 		
-		//Get the Browser Name for this driver object
-		public String getBrowserName() {
-			return this.browserName;
-		}
+		/*
+		 * get the default chromeOption and desiredCapabilities
+		 * ------------------------------------------------------
+		 */
+			public ChromeOptions getdefaultChromeOption() {
+				this.options = new ChromeOptions();
+				for(String flag : this.defaultChromeOptions)
+					this.options.addArguments(flag);
+				return this.options;
+			}
+			public ChromeOptions getdefaultChromeOptionWithIncognito() {
+				this.options = new ChromeOptions();
+				for(String flag : this.defaultchromeOptionsWithIncognito)
+					this.options.addArguments(flag);
+				return this.options;
+			}
+			public DesiredCapabilities getDefaultCapabilitiesForFirefox() {
+				this.capabilities = DesiredCapabilities.firefox();
+				//this.capabilities.setCapability();
+				return this.capabilities;
+			}
+			public DesiredCapabilities getDefaultCapabilitiesForIE() {
+				this.capabilities = DesiredCapabilities.internetExplorer();
+				this.capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+				this.capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING,true);
+				return this.capabilities;
+			}
+			public DesiredCapabilities getDefaultCapabilitiesForEdge() {
+				this.capabilities = DesiredCapabilities.edge();
+				return this.capabilities;
+			}
 		
-		// Close the current driver
-		public void closeDriver() {
-			this.driver.close();
-		}
-		
-		//Quit the current driver
-		public void quitDriver() {
-			this.driver.quit();
-		}
+		/*
+		 * Driver Native functions
+		 * ------------------
+		 */
+			//Get the Browser Name for this driver object
+			public String getBrowserName() {
+				return this.browserName;
+			}
+			
+			// Close the current driver
+			public void closeDriver() {
+				this.driver.close();
+			}
+			
+			//Quit the current driver
+			public void quitDriver() {
+				this.driver.quit();
+			}
 		
 	//=============================================================
 	// Private: functions
@@ -85,104 +158,124 @@ public class Driver {
 		
 		//Set the system property for webdriver
 		private boolean setProperty(String browserName, String driverPath) {
-			switch(browserName) {
-				case "chrome"	: System.setProperty("webdriver.chrome.driver", driverPath); break;
-				case "firefox"	: System.setProperty("webdriver.gecko.driver", 	driverPath); break;
-				case "ie"		: System.setProperty("webdriver.ie.driver", 	driverPath); break;
-				case "edge"		: System.setProperty("webdriver.edge.driver", 	driverPath); break;
-				default 		: return false;
+			
+			switch(browserName.toLowerCase()) {
+				case "chrome"	: 	System.setProperty("webdriver.chrome.driver", 	driverPath); break;
+				case "firefox"	: 	System.setProperty("webdriver.gecko.driver", 	driverPath); break;
+				case "ie"		: 	System.setProperty("webdriver.ie.driver", 		driverPath); break;
+				case "edge"		: 	System.setProperty("webdriver.edge.driver", 	driverPath); break;
+				//DEFAULT
+				default 		: 	System.out.println(this.errorMsgForWrongBrwserPassed);
+									return false;
 			}
 			//returning the status
 			return true;
 		}
 		
-		//Set the chrome options for current object.
-		private void setChromeOptions(ChromeOptions chromeOptions) {
-			this.options = chromeOptions;
-		}
+		/*
+		 * =========================================
+		 * Local WebDriver initiations
+		 * -----------------------------------------
+		 */
 		
-		//Set the desired capabilities for current object.
-		private void setDesiredCapabilites(DesiredCapabilities capabilities) {
-			this.capabilities = capabilities;
-		}
-		
-		//Set Browser for this driver object
-		private void setDriver(String browserName) {
-			this.browserName = browserName;
-		}
-		
-		//Initializing the driver
-		public boolean initDriver(String initWith) {
-			switch(initWith) {
-				case 	"chrome"					: this.initChrome(); 	
-					break;
-				case	"chromeWithOptions"			: this.initChromeWithOptions(this.options);
-					break;
-				case	"chromeWithCapabilities"	: this.initChromeWithDesiredCapabilities(this.capabilities);
-					break;
-				case	"firefox"					: this.initFirefox(); 	
-					break;
-				case	"firefoxWithCapabilities"	: this.initFirefoxWithDesiredCapabilities(this.capabilities); 	
-					break;
-				case	"edge"						: this.initEdge(); 		
-					break;
-				case	"edgeWithCapabilities"		: this.initEdgeWithDesiredCapabilities(this.capabilities); 	
-					break;
-				case	"ie"						: this.initIE();
-					break;
-				case	"ieWithCapabilities"		: this.initIEWithDesiredCapabilities(this.capabilities); 	
-					break;
+					//Set the chrome options for current object.
+					private void setChromeOptions(ChromeOptions chromeOptions) {
+						this.options = chromeOptions;
+					}
+					
+					//Set the desired capabilities for current object.
+					private void setDesiredCapabilites(DesiredCapabilities capabilities) {
+						this.capabilities = capabilities;
+					}
+					
+					//Set Browser for this driver object
+					private void setDriver(String browserName) {
+						this.browserName = browserName;
+					}
+					
+					//Initializing the driver
+					private boolean initDriver(String initWith) {
+						System.out.println("INIT DRIVER PARAMETER: " + initWith);
+						switch(initWith.toUpperCase()) {
+							case 	"CHROME"					: this.initChrome();
+								break;
+							case	"CHROME_WITH_OPTIONS"		: this.initChromeWithOptions(this.options);
+								break;
+							case	"CHROME_WITH_CAPABILITIES"	: this.initChromeWithDesiredCapabilities(this.capabilities);
+								break;
+							case	"FIREFOX"					: this.initFirefox(); 	
+								break;
+							case	"FIREFOX_WITH_CAPABILITIES"	: this.initFirefoxWithDesiredCapabilities(this.capabilities); 	
+								break;
+							case	"EDGE"						: this.initEdge(); 		
+								break;
+							case	"EDGE_WITH_CAPABILITIES"	: this.initEdgeWithDesiredCapabilities(this.capabilities); 	
+								break;
+							case	"IE"						: this.initIE();
+								break;
+							case	"IE_WITH_CAPABILITIES"		: this.initIEWithDesiredCapabilities(this.capabilities); 	
+								break;
+							
+							//DEFAULT
+							default	: 	this.initChrome();	
+										System.out.println("As a default WebDriver: Chrome");
+										break;
+						}
+						return true;
+					}
+					
+					// Chrome browser
+					//----------------------------------------------------------------
+					private void initChrome() {
+						this.driver = new ChromeDriver();
+					}
+					private void initChromeIncognito() {
+						this.driver = new ChromeDriver();
+					}
+					private void initChromeWithOptions(ChromeOptions options) {
+						this.driver = new ChromeDriver(options);
+					}
+					private void initChromeWithDesiredCapabilities( DesiredCapabilities capabilities) {
+						this.driver = new ChromeDriver(capabilities);
+					}
+					
+					// Firefox browser
+					//----------------------------------------------------------------
+					private void initFirefox() {
+						this.driver = new FirefoxDriver();
+					}
+					private void initFirefoxIncognito() {
+						this.driver = new FirefoxDriver();
+					}
+					private void initFirefoxWithDesiredCapabilities( DesiredCapabilities capabilities) {
+						this.driver = new FirefoxDriver( capabilities );
+					}
+			
+					// Edge browser
+					//----------------------------------------------------------------
+					private void initEdge() {
+						driver = new EdgeDriver();
+					}
+					private void initEdgeWithDesiredCapabilities( DesiredCapabilities capabilities) {
+						driver = new EdgeDriver(capabilities);
+					}
+					
+					// IE browser
+					//----------------------------------------------------------------
+					private void initIE() {
+						
+					}
+					private void initIEWithDesiredCapabilities( DesiredCapabilities capabilities) {
+						
+					}
+		/*
+		 * =========================================
+		 * Remote WebDriver initiations
+		 * -----------------------------------------
+		 * [ CHROME | FIREFOX | IE | EDGE | SAFARI ]
+		 * [ ANDROID | IPHONE | SELENIUM_RC ]
+		 * -----------------------------------------
+		 */
 				
-				//DEFAULT
-				default	: 	this.initChrome();	
-							break;
-			}
-			return true;
-		}
-		
-		// Chrome browser
-		//----------------------------------------------------------------
-		private void initChrome() {
-			this.driver = new ChromeDriver();
-		}
-		private void initChromeIncognito() {
-			this.driver = new ChromeDriver();
-		}
-		private void initChromeWithOptions(ChromeOptions options) {
-			this.driver = new ChromeDriver(options);
-		}
-		private void initChromeWithDesiredCapabilities( DesiredCapabilities capabilities) {
-			this.driver = new ChromeDriver(capabilities);
-		}
-		
-		// Firefox browser
-		//----------------------------------------------------------------
-		private void initFirefox() {
-			this.driver = new FirefoxDriver();
-		}
-		private void initFirefoxIncognito() {
-			this.driver = new FirefoxDriver();
-		}
-		private void initFirefoxWithDesiredCapabilities( DesiredCapabilities capabilities) {
-			this.driver = new FirefoxDriver( capabilities );
-		}
-
-		// Edge browser
-		//----------------------------------------------------------------
-		private void initEdge() {
-			driver = new EdgeDriver();
-		}
-		private void initEdgeWithDesiredCapabilities( DesiredCapabilities capabilities) {
-			driver = new EdgeDriver(capabilities);
-		}
-		
-		// IE browser
-		//----------------------------------------------------------------
-		private void initIE() {
 			
-		}
-		private void initIEWithDesiredCapabilities( DesiredCapabilities capabilities) {
-			
-		}
-		
 } /* End of Class */
