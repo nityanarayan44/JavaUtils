@@ -18,6 +18,7 @@ package org.nng.automation.utils;
 
 import java.awt.RenderingHints.Key;
 import java.io.File;
+import java.util.Set;
 
 import org.openqa.selenium.support.ui.Select;
 import org.apache.commons.io.FileUtils;
@@ -182,6 +183,27 @@ public class Action {
 			public void dismissAlert(WebDriver webDriver) throws Exception{
 				Alert alert = webDriver.switchTo().alert();
 				alert.dismiss();
+			}
+			
+		/*
+		 * Switching, Window, Tab and Window Handles
+		 * -----------------------------------------
+		 */
+			public Set<String> getWindowHandles(WebDriver webdriver) throws Exception{
+				return webdriver.getWindowHandles();
+			}
+			public String getCurrentWindow(WebDriver webdriver) throws Exception {
+				return webdriver.getWindowHandle();
+			}
+			public WebDriver switchToWindow(WebDriver webdriver, String windowName) throws Exception{
+				webdriver.switchTo().window(windowName);
+				return webdriver.switchTo().window(windowName);
+			}
+			public void switchToNextTab(WebDriver webdriver) {
+				
+			}
+			public void switchToPreviousTab(WebDriver webdrivers) {
+				
 			}
 			
 		/*
