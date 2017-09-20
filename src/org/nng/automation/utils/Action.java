@@ -219,14 +219,6 @@ public class Action {
 				return true;
 			}
 			
-			public boolean captureElementScreenshot(WebDriver webDriver, String findBy, String elementIdentifier, String saveToPath) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
-				File source = element.getScreenshotAs(OutputType.FILE);
-				File elementScreenshot = new File(saveToPath + source.getName());
-				FileUtils.copyFile(source, elementScreenshot);
-				return true;
-			}
-			
 			public void doClick(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
 				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
 				element.click();

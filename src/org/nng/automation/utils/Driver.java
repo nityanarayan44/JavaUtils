@@ -48,6 +48,15 @@ public class Driver {
 		public String[] IEDefaultCapabilities				= {"INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS", "IGNORE_ZOOM_SETTING"};
 		public String[] FirefoxDefaultCapabilities			= {""};
 		
+		// For remote server address
+		public String APPIUM_URL 		= "http://127.0.0.1:4723/wd/hub";		//Specific complete address, where appium server is running and listening 
+		public String PLATFORM_NAME 	= "Android";							//Specification of Mobile Platform either of "Android" || "iOS"
+		public String PLATFORM_VERSION 	= "7.1.1";								//Specification of Mobile platform version
+		public String DEVICE_NAME 		= "Android";							//Device Name.
+		public String APP_PACKAGE 		= "com.android.calculator2";			//Name of the application package.
+		public String APP_ACTIVITY 		= "com.android.calculator2.Calculator";	//Name of the application activity from where to start.
+		public String APP 				= "";									//In case if we want to load an android application from a given location.
+		public String UDID				= "";
 		
 	/*
 	 * -----------------------
@@ -215,7 +224,10 @@ public class Driver {
 								break;
 							case	"IE_WITH_CAPABILITIES"		: this.initIEWithDesiredCapabilities(this.capabilities); 	
 								break;
-							
+							case	"ANDROID_WITH_CAPABILITY"	:
+								break;
+							case	"IOS_WITH_CAPABILITY"		:
+								break;
 							//DEFAULT
 							default	: 	this.initChrome();	
 										System.out.println("As a default WebDriver: Chrome");
