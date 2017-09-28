@@ -66,7 +66,7 @@ public class Driver {
 		@Override
 		protected void finalize() throws Throwable {
 			//super.finalize();
-			System.out.println(">>> Closing and Quiting current driver object.");
+			//System.out.println(">>> Closing and Quiting current driver object.");
 			this.closeDriver();
 			this.quitDriver();
 		}

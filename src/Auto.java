@@ -8,19 +8,32 @@
 import java.util.List;
 
 import org.nng.automation.utils.Action;
-import org.nng.automation.utils.Excel;
+import org.nng.utils.Excel;
 import org.nng.automation.utils.Driver;
 import org.openqa.selenium.WebDriver;
 
 public class Auto {
 
 	public static void main(String[] args) throws Exception {
-		Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\FLEXI-CRM-Scenario.xlsx");
-		
-		//;
-		List<String> data = excel.getRowData("Login", 5);
+		Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\Automation\\GitProjects\\tp-bhs\\BHS_Regression\\src\\com\\test\\TestDataXLS\\TC_128_addNewUserData.xlsx");
+		//Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\FLEXI-CRM-Scenario.xlsx");
+		//excel.printExcelSheet(0);
+		List<String> data = excel.getRowData(0, 1);
 		System.out.println("DATA >>>> Len="+ data.size());
 		for(String str :  data) { System.out.println(str); }
+		
+		//set data
+		excel.setDataToCell(0, 1, 0, "1000002");
+		
+		//Print again
+		data = excel.getRowData(0, 1);
+		System.out.println("DATA >>>> Len="+ data.size());
+		for(String str :  data) { System.out.println(str); }
+		
+		//;
+//		List<String> data = excel.getRowData("Login", 5);
+//		System.out.println("DATA >>>> Len="+ data.size());
+//		for(String str :  data) { System.out.println(str); }
 	}
 	
 	public void stup1() throws InterruptedException {

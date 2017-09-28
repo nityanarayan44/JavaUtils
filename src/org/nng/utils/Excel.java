@@ -1,5 +1,5 @@
 /**
- * @package org.nng.automation.utils
+ * @package org.nng.utils
  * @author Ashutosh Mishra [@github: nityanarayan44]
  * @desc Provides Excel file utility under "org.nng.automation.utils" package
  * 
@@ -12,7 +12,7 @@
  *  TODO: Documentation of this class and functions.
  */
 
-package org.nng.automation.utils;
+package org.nng.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,7 +43,7 @@ public class Excel {
 		private Cell cell 						= null;
 		private Row row 						= null;
 	
-		//XSSF For Microsoft Excel Files
+		//XSSF For XLSX Files
 		//HSSF for CSV, OLE2 files
 	//=============================================================
 	// cONSTRUCTOR
@@ -92,7 +92,7 @@ public class Excel {
 		 */
 		private void initXLSStream() throws FileNotFoundException, IOException, Exception {
 			this.inputStream 	= new FileInputStream(this.excelFilePath);
-			this.workbook 		= new XSSFWorkbook(this.inputStream);
+			this.workbook 		= new HSSFWorkbook(this.inputStream);
 		}
 		
 		/**
@@ -201,13 +201,14 @@ public class Excel {
 		public ArrayList<String> getRowData(String sheetName, int rowIndex) throws Exception {
 			Sheet objSheet 	= (this.workbook).getSheet(sheetName);
 			ArrayList<String> columnData = new ArrayList<String>();
-			columnData.add("");
 			Row row= objSheet.getRow(rowIndex);
 			// Collecting all cell data in a Specified Column
 			for(int i=0; i <= row.getLastCellNum(); i++) {
 				if (row != null && row.getCell(i) != null)
 					columnData.add( row.getCell(i).toString());		
 			}
+			// If excel is empty
+			if(columnData.size() == 0) { columnData.add(""); }
 			return columnData;
 		}
 		
@@ -222,13 +223,14 @@ public class Excel {
 		public ArrayList<String> getRowData(int sheetIndex, int rowIndex) throws Exception{
 			Sheet objSheet 	= (this.workbook).getSheetAt(sheetIndex);
 			ArrayList<String> columnData = new ArrayList<String>();
-			columnData.add("");
 			Row row= objSheet.getRow(rowIndex);
 			// Collecting all cell data in a Specified Column
 			for(int i=0; i <= row.getLastCellNum(); i++) {
 				if (row != null && row.getCell(i) != null)
 					columnData.add( row.getCell(i).toString());		
 			}
+			// If excel is empty
+			if(columnData.size() == 0) { columnData.add(""); }
 			return columnData;
 		}
 				
@@ -341,6 +343,30 @@ public class Excel {
 					System.out.print(row.getCell(loopj).toString() + " | "); 
 				} System.out.println(" |");
 			}
+		}
+		
+		/*
+		 *  Writing to a cell in current Excel File
+		 */
+		public void setDataToCell(int sheetIndex, int rowIndex, int columnIndex, String value) throws IOException, Exception {
+			Row row 		= null;
+			Sheet objSheet 	= (this.workbook).getSheetAt(sheetIndex);
+			row = objSheet.getRow(1);
+			objSheet.getRow(rowIndex).createCell(columnIndex).setCellValue(value);
+			//Writing data to a specified cell.
+			this.outputStream = new FileOutputStream(this.excelFilePath);
+			workbook.write(outputStream);			
+			outputStream.close();	
+			return;
+		}
+		
+		/*
+		 * Close the current FileStream.
+		 */
+		public void closeFileStreams() throws Exception{
+			if(this.inputStream != null) this.inputStream.close();
+			if(this.outputStream != null) this.outputStream.close();
+			return;
 		}
 		
 }/* End of Class */
