@@ -120,7 +120,7 @@ public class Action {
 		 * ---------------------------
 		 */
 			public void selectFromDropDown(WebDriver webDriver, String findBy, String elementIdentifier, String selectBy, String selectionValue) throws Exception {	
-				WebElement element = findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element = this.findElement(webDriver, findBy, elementIdentifier);
 				Select dropdown = new Select(element);
 				//Selection Criteria
 				switch(selectBy.toUpperCase()) {
@@ -220,32 +220,32 @@ public class Action {
 			}
 			
 			public void doClick(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				element.click();
 			}
 			
 			public void doSubmit(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				element.submit();
 			}
 			
 			public Point getElementPositionPoint(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.getLocation();
 			}
 			
 			public boolean isEnable(WebDriver webDriver, String findBy, String elementIdentifier)  throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.isEnabled();
 			}
 		
 			public boolean isSelected(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.isSelected();
 			}
 			
 			public boolean isVisible(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.isDisplayed();
 			}
 		
@@ -258,22 +258,22 @@ public class Action {
 		 * -----------------------------------
 		 */
 			public void setElementValue(WebDriver webDriver, String findBy, String elementIdentifier, String value) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				element.sendKeys(value);
 			}
 			
 			public void setElementValue(WebDriver webDriver, String findBy, String elementIdentifier, Keys keyValue) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				element.sendKeys(keyValue);
 			}
 			
 			public String getElementValue(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.getText().toString();
 			}
 			
 			public String getElementValue(WebDriver webDriver, String findBy, String elementIdentifier, String valueType) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				switch(valueType.toUpperCase()) {
 					case "TEXT"		: return element.getText().toString();
 					case "CSSVALUE"	: return element.getCssValue(valueType).toString();
@@ -283,13 +283,17 @@ public class Action {
 			}
 			
 			public String getElementValueByProperty(WebDriver webDriver, String findBy, String elementIdentifier, String property) throws Exception {
-				WebElement element=findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.getAttribute(property).toString();
 			}
 			
 			public void clearElementValue(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
-				WebElement element = findElementWithExplicitWait(webDriver, findBy, elementIdentifier);
+				WebElement element = this.findElement(webDriver, findBy, elementIdentifier);
 				element.clear();
 			}
 		
+			public int getElementsSize(WebDriver webDriver, String elementIdentifier) throws Exception {
+				return (webDriver.findElements(By.xpath(elementIdentifier)).size());
+			}
+			
 } /* End of class */

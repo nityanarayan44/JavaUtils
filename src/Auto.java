@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 public class Auto {
 
 	public static void main(String[] args) throws Exception {
-		Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\Automation\\GitProjects\\tp-bhs\\BHS_Regression\\src\\com\\test\\TestDataXLS\\TC_128_addNewUserData.xlsx");
+		Excel excel = new Excel("./data/TC_128_addNewUserData.xlsx");
 		//Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\FLEXI-CRM-Scenario.xlsx");
 		//excel.printExcelSheet(0);
 		List<String> data = excel.getRowData(0, 1);

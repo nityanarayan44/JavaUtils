@@ -67,7 +67,7 @@ public class Driver {
 		protected void finalize() throws Throwable {
 			//super.finalize();
 			//System.out.println(">>> Closing and Quiting current driver object.");
-			this.closeDriver();
+			//this.closeDriver();
 			this.quitDriver();
 		}
 		
