@@ -28,11 +28,8 @@ public class UnitConversion {
 		 * @return String
 		 * @Desc From minute to HMS
 		 */
-		public java.lang.String minutesToHMSTime( double time_input ) {
-			Integer a = (int) (time_input * 60) ;
-			
-			this.time_output = "" + a ;
-			return this.time_output;
+		public java.lang.String minutesToHMSTime( long time_input ) {
+			return this.secondsToHMSTime(time_input * 60) ;
 		}
 		
 		/**

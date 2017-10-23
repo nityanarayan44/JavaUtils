@@ -8,6 +8,7 @@
 import java.util.List;
 
 import org.nng.utils.Excel;
+import org.nng.utils.UnitConversion;
 
 public class Examples {
 
@@ -20,7 +21,10 @@ public class Examples {
 			Examples example = new Examples();	
 			
 			// Implementing Excel Utility
-			example.excelExample();
+			//example.excelExample();
+			
+			// Implementing TimeUnit Conversion
+			example.conversion();
 		}
 	
 	/*
@@ -28,14 +32,28 @@ public class Examples {
 	 * Utility Implementation Code
 	 * =================================
 	 * */
-		public void printData(List<String> colData) throws Exception {
+		public void printData(List<String> data) throws Exception {
 			// Print the results.
-				System.out.println("DATA >>>> Len="+ colData.size());
-				for(String str :  colData) { System.out.println(str); }
+				System.out.println("DATA >>>> Len="+ data.size());
+				for(String str :  data) { System.out.println(str); }
 			// End
 			return;
 		}
 		
+		/*
+		 * Unit Conversion Utility
+		 */
+		public void conversion() throws Exception {
+			UnitConversion uc = new UnitConversion();
+			//conversion
+			long seconds = 3600; // 1 Hour
+			System.out.println(seconds+ " Seconds to HMS: " + uc.secondsToHMSTime(seconds) );
+			long minutes = 68; // 1 hours 8 secs
+			System.out.println(minutes+ " Minutes to HMS: " + uc.minutesToHMSTime(minutes) );
+		}
+		/*
+		 * Excel Utility
+		 */
 		public void excelExample() throws Exception {
 			// Excel Object creation
 				// Excel File Format: XLSX
