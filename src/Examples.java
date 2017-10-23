@@ -48,7 +48,7 @@ public class Examples {
 			//conversion
 			long seconds = 3600; // 1 Hour
 			System.out.println(seconds+ " Seconds to HMS: " + uc.secondsToHMSTime(seconds) );
-			long minutes = 68; // 1 hours 8 secs
+			long minutes = 68; // 1 hours 8 minutes
 			System.out.println(minutes+ " Minutes to HMS: " + uc.minutesToHMSTime(minutes) );
 		}
 		/*
