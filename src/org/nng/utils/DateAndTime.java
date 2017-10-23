@@ -14,6 +14,7 @@ public class DateAndTime {
 	 *  Get the date and time
 	 * --------------------------------
 	 */
+		//Get Current data
 		public String getCurrentDateAsD_M_Y() {
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate localDate = LocalDate.now();
@@ -21,6 +22,7 @@ public class DateAndTime {
 			return current_Date;
 		}
 		
+		// Get Past date.
 		public String getPreviousDateByDays(long forDays) {
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate localDate = LocalDate.now();
@@ -49,7 +51,7 @@ public class DateAndTime {
 			return previous_Date;
 		}
 		
-		// For future date.
+		// Get future date.
 		public String getFutureDateByDays(long forDays) {
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate localDate = LocalDate.now();

@@ -24,9 +24,9 @@ public class UnitConversion {
 	//Functions for time unit
 	//=============================================
 		/**
-		 * @author Ashutosh Mishra [NNG]
 		 * @param time_input
 		 * @return String
+		 * @Desc From minute to HMS
 		 */
 		public java.lang.String minutesToHMSTime( double time_input ) {
 			Integer a = (int) (time_input * 60) ;
@@ -35,12 +35,16 @@ public class UnitConversion {
 			return this.time_output;
 		}
 		
+		/**
+		 * @param time_input
+		 * @return String
+		 * @Desc From Seconds to HMS
+		 */
 		public java.lang.String secondsToHMSTime( long totalSeconds_input ) {
 			long raw_minutes = 0, raw_seconds = 0;
 			long hours = 0;
 			long minutes = 0;
 			long seconds = 0;
-			
 			
 			if( totalSeconds_input > 59) {
 				raw_minutes = (totalSeconds_input) / 60;
