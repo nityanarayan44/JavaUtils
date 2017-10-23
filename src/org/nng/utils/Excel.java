@@ -63,7 +63,6 @@ public class Excel {
 	//=============================================================
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param excelFilePath
 		 * @return boolean
 		 * @throws Exception
@@ -84,7 +83,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @throws FileNotFoundException
 		 * @throws IOException
 		 * @throws Exception
@@ -96,7 +94,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @throws FileNotFoundException
 		 * @throws IOException
 		 * @throws Exception
@@ -108,7 +105,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetName
 		 * @return boolean
 		 * @throws Exception
@@ -120,7 +116,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetIndex
 		 * @return boolean
 		 * @throws Exception
@@ -132,7 +127,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetName
 		 * @return int
 		 * @throws Exception
@@ -144,7 +138,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetIndex
 		 * @return int
 		 * @throws Exception
@@ -156,7 +149,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetName
 		 * @param rowNum
 		 * @param colNum
@@ -173,7 +165,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetName
 		 * @param colName
 		 * @return int
@@ -184,14 +175,31 @@ public class Excel {
 			int colIndex= -1;
 			Row row 	= ( (this.workbook).getSheet(sheetName) ).getRow(0);
 			for(int i=0; row != null && i<row.getLastCellNum(); i++) {
-				if(row.getCell(i).toString().equalsIgnoreCase(colName))
+				if(row.getCell(i).toString().contains(colName))
 					colIndex= row.getCell(i).getColumnIndex();
 			}
 			return colIndex;
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
+		 * @Overloaded
+		 * @param sheetIndex
+		 * @param colName
+		 * @return int
+		 * @throws Exception
+		 * @desc Return Column index[-1 if column not found], when column name is provided.
+		 */
+		public int getColumnIndex(int sheetIndex, String colName) throws Exception {
+			int colIndex= -1;
+			Row row 	= ( (this.workbook).getSheetAt(sheetIndex) ).getRow(0);
+			for(int i=0; row != null && i<row.getLastCellNum(); i++) {
+				if(row.getCell(i).toString().contains(colName))
+					colIndex= row.getCell(i).getColumnIndex();
+			}
+			return colIndex;
+		}		
+		
+		/**
 		 * @param sheetName
 		 * @param rowIndex
 		 * @return ArrayList<String>
@@ -213,7 +221,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetIndex
 		 * @param rowIndex
 		 * @return ArrayList<String>
@@ -235,7 +242,6 @@ public class Excel {
 		}
 				
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetName
 		 * @param colName
 		 * @return ArrayList<String>
@@ -259,7 +265,32 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
+		 * @Overloaded
+		 * @param sheetIndex
+		 * @param colName
+		 * @return ArrayList<String>
+		 * @throws Exception
+		 * @Desc Return column data as list, If sheet Index and Column index is known
+		 */
+		public ArrayList<String> getColumnData(int sheetIndex, String colName) throws Exception {
+			Sheet objSheet 	= (this.workbook).getSheetAt(sheetIndex);
+			int rowCount 	= this.getRowCount(sheetIndex);
+			int colIndex 	= this.getColumnIndex(sheetIndex, colName);
+			Row row 		= null;
+			ArrayList<String> columnData = new ArrayList<String>();
+			//columnData.add("-[LIST]-");
+			// Collecting all cell data in a Specified Column
+			for(int i=1; i<rowCount+1; i++) {
+				row = objSheet.getRow(i);
+				if (row != null && row.getCell(colIndex) != null) {
+					//System.out.println(">>> I="+ i + ", " + row.getCell(colIndex));
+					columnData.add( row.getCell(colIndex).toString() );
+				}
+			}
+			return columnData;
+		}
+		
+		/**
 		 * @param sheetName
 		 * @param colIndex
 		 * @return ArrayList<String>
@@ -281,7 +312,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetIndex
 		 * @param colIndex
 		 * @return ArrayList<String>
@@ -306,7 +336,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetIndex
 		 * @throws Exception
 		 * @desc Prints the entire excel sheet,
@@ -326,7 +355,6 @@ public class Excel {
 		}
 		
 		/**
-		 * @author Ashutosh Mishra
 		 * @param sheetName
 		 * @throws Exception
 		 * @desc print the Excel entire sheet,

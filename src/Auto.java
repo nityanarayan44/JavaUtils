@@ -15,26 +15,38 @@ import org.openqa.selenium.WebDriver;
 public class Auto {
 
 	public static void main(String[] args) throws Exception {
-		Excel excel = new Excel("./data/TC_128_addNewUserData.xlsx");
-		//Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\FLEXI-CRM-Scenario.xlsx");
-		//excel.printExcelSheet(0);
-		List<String> data = excel.getRowData(0, 1);
-		System.out.println("DATA >>>> Len="+ data.size());
-		for(String str :  data) { System.out.println(str); }
+		// Excel Object creation
+			// Excel File Format: XLSX
+			//Excel excel = new Excel("./data/TC_128_addNewUserData.xlsx");
+			
+			// Excel File Format: XLS
+			Excel excel = new Excel("./data/UserData2003Format.xls");
+			
+		// getting Data from an Excel file
+			//Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\FLEXI-CRM-Scenario.xlsx");
+			//excel.printExcelSheet(0);
+			
+			// CASE: Get Row data by SheetIndex and rowIndex
+			//List<String> data = excel.getRowData(0, 1);
 		
-		//set data
-		excel.setDataToCell(0, 1, 0, "1000002");
+			// CASE: Get Row data by SheetName and rowIndex
+			//List<String> data = excel.getRowData("sheet1", 1);
 		
-		//Print again
-		data = excel.getRowData(0, 1);
-		System.out.println("DATA >>>> Len="+ data.size());
-		for(String str :  data) { System.out.println(str); }
+			// CASE: Get Column data by Column Name
+			List<String> colData = excel.getColumnData(0, "USERID");
+			
+		// Print the results.
+			System.out.println("DATA >>>> Len="+ colData.size());
+			for(String str :  colData) { System.out.println(str); }
+			
 		
-		//;
-//		List<String> data = excel.getRowData("Login", 5);
-//		System.out.println("DATA >>>> Len="+ data.size());
-//		for(String str :  data) { System.out.println(str); }
 	}
+	
+	
+	
+	
+	
+	
 	
 	public void stup1() throws InterruptedException {
 		WebDriver wdriver = null;
