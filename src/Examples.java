@@ -1,7 +1,7 @@
 /**
  * @author Ashutosh Mishra
- * @desc just a sample file to check the Driver and Action class 
- * under org.nng.automation.utils package.
+ * Examples.java
+ * @desc just a sample file to implement an Example for the utilities.
  * 
  */
 
