@@ -1,7 +1,7 @@
 /**
  * @author Ashutosh Mishra
- * @desc just a sample file to check the Driver and Action class 
- * under org.nng.automation.utils package.
+ * Examples.java
+ * @desc just a sample file to implement an Example for the utilities.
  * 
  */
 
@@ -21,10 +21,10 @@ public class Examples {
 			Examples example = new Examples();	
 			
 			// Implementing Excel Utility
-			example.excelExample();
+			//example.excelExample();
 			
 			// Implementing TimeUnit Conversion
-			//example.conversion();
+			example.conversion();
 		}
 	
 	/*
@@ -57,10 +57,10 @@ public class Examples {
 		public void excelExample() throws Exception {
 			// Excel Object creation
 				// Excel File Format: XLSX
-				Excel excel = new Excel("./data/TC_128_addNewUserData.xlsx");
+				//Excel excel = new Excel("./data/TC_128_addNewUserData.xlsx");
 				
 				// Excel File Format: XLS
-				//Excel excel = new Excel("./data/UserData2003Format.xls");
+				Excel excel = new Excel("./data/UserData2003Format.xls");
 				
 			// getting Data from an Excel file
 				//Excel excel = new Excel("E:\\OFFICE-WORKPLACE\\__TestPoint\\FLEXI-CRM-Scenario.xlsx");
@@ -73,14 +73,10 @@ public class Examples {
 				//List<String> data = excel.getRowData("sheet1", 1);
 			
 				// CASE: Get Column data by Column Name
-				//List<String> colData = excel.getColumnData(0, "USERID");
-				
-				// CASE: Get a cell data by a column name
-				//List<String> colData = excel.getColumnData(0, "CONTACTNO");
-				System.out.println(">>>" + (excel.getColumnData(0, "CONTACTNO")).get(9));
+				List<String> colData = excel.getColumnData(0, "USERID");
 				
 			// Print the results.
-				//this.printData(colData);
+				this.printData(colData);
 		}
 	
 /*EOClass*/
