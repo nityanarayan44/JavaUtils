@@ -6,8 +6,11 @@
  */
 package org.nng.utils;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 @SuppressWarnings("unused")
-public class UnitConversion {
+public class Conversion {
 	//=============================================
 	//Private Members
 	//=============================================
@@ -69,6 +72,10 @@ public class UnitConversion {
 			return this.time_output;
 		}
 		
+		// Data Encoding Conversion
+		public static String convertToUTF8(String str) throws Exception {
+			return (new String(str.getBytes(ISO_8859_1), UTF_8));
+		}
 		
 		
 }

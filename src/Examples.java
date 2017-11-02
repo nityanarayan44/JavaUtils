@@ -8,7 +8,8 @@
 import java.util.List;
 
 import org.nng.utils.Excel;
-import org.nng.utils.UnitConversion;
+import org.nng.utils.Conversion;
+import static java.nio.charset.StandardCharsets.*;
 
 public class Examples {
 
@@ -20,11 +21,16 @@ public class Examples {
 		public static void main(String[] args) throws Exception {
 			Examples example = new Examples();	
 			
+			String myString = "chrome";
+			byte[] ptext = myString.getBytes(ISO_8859_1); 
+			String value = new String(ptext, UTF_8);
+			 System.out.println(">>> " + value);
+			 
 			// Implementing Excel Utility
 			//example.excelExample();
-			
+			//myString.compareTo("");
 			// Implementing TimeUnit Conversion
-			example.conversion();
+			//example.conversion();
 		}
 	
 	/*
@@ -44,7 +50,7 @@ public class Examples {
 		 * Unit Conversion Utility
 		 */
 		public void conversion() throws Exception {
-			UnitConversion uc = new UnitConversion();
+			Conversion uc = new Conversion();
 			//conversion
 			long seconds = 3600; // 1 Hour
 			System.out.println(seconds+ " Seconds to HMS: " + uc.secondsToHMSTime(seconds) );

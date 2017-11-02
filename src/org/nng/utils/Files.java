@@ -48,6 +48,8 @@ public class Files {
 				//add each line to array bucket
 					texts.add(sCurrentLine);
 			}
+			
+			
 		
 		//Close the stream now.
 			if (br != null) br.close();

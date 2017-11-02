@@ -4,7 +4,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		UnitConversion uc = new UnitConversion();
+		Conversion uc = new Conversion();
 		
 		System.out.println("input to HMS: ");
 		// 198 = 0.3.18
