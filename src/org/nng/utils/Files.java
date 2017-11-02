@@ -17,7 +17,35 @@ public class Files {
 		String file = "yourFileName.ext";
 		pw.write(text);
 	}
-
+	
+	//Read the files
+	public String readFile(File fileObj) throws Exception {
+		System.out.println("Reading ....");
+		// Vars
+			String text = "";
+			BufferedReader br = null;
+			FileReader fr = null;
+			String sCurrentLine = "";
+			
+		//Initiating file reader and buffer reader.
+			fr = new FileReader(fileObj);
+			br = new BufferedReader(fr);
+			
+		//Reading file now, line by line.
+			while ((sCurrentLine = br.readLine()) != null) {
+				//trim all the gaps and tabs
+					String line = sCurrentLine.replaceAll("[\t]+", "");
+				//split the line, if it contains '='
+					text += line;
+			}
+		
+		//Close the stream now.
+			if (br != null) br.close();
+			if (fr != null) fr.close();
+			
+		// return the data
+			return text;
+	}
 	// Close the file.
 	public void closeFile() throws Exception { if(!pw.equals(null)) pw.close(); }
 }
