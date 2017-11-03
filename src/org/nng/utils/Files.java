@@ -16,17 +16,33 @@ public class Files {
 		PrintWriter pw 		= null;
 		BufferedReader br 	= null;
 		FileReader fr 		= null;
-		String file 		= null;
+		File file 			= null;
+		String filename 	= null;
 		
 	// Constructor
+	public Files() throws Exception {
+		//pw = new PrintWriter(new File(file));
+	}
+	
 	public Files(String file) throws Exception {
 		pw = new PrintWriter(new File(file));
 	}
-
+	
+	// Set file.
+	public void setFile(File file) throws Exception {
+		this.file = file;
+		pw = new PrintWriter(this.file);
+	}
+	
+	// Get file
+	public File getFile() throws Exception {
+		return this.file;
+	}
+	
 	//Write content inside a file.
 	public void writeFile(String text) throws Exception {
 		// If you want this file in a specific location then give absolute path along with the filename.
-		pw.write(text);
+		if(!pw.equals(null)) pw.write(text);
 		return;
 	}
 	

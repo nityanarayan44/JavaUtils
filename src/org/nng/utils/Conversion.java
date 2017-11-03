@@ -73,6 +73,7 @@ public class Conversion {
 		}
 		
 		// Data Encoding Conversion
+		// Normal Java String to UTF-8
 		public static String convertToUTF8(String str) throws Exception {
 			return (new String(str.getBytes(ISO_8859_1), UTF_8));
 		}
