@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="1" failed="1" total="2" passed="0">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="47" started-at="2017-11-03T06:07:03Z" finished-at="2017-11-03T06:07:03Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="47" started-at="2017-11-03T06:07:03Z" finished-at="2017-11-03T06:07:03Z">
+      <class name="WriteABrowser">
+        <test-method status="SKIP" signature="run(java.lang.String)[pri:0, instance:WriteABrowser@12843fce]" name="run" duration-ms="0" started-at="2017-11-03T11:37:03Z" finished-at="2017-11-03T11:37:03Z">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Parameter 'browserName' is required by @Test on method run but has not been marked @Optional or defined
+in C:\Users\Ashutosh Mishra\AppData\Local\Temp\testng-eclipse--1593902509\testng-customsuite.xml]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Parameter 'browserName' is required by @Test on method run but has not been marked @Optional or defined
+in C:\Users\Ashutosh Mishra\AppData\Local\Temp\testng-eclipse--1593902509\testng-customsuite.xml
+	at org.testng.internal.Parameters.createParameters(Parameters.java:148)
+	at org.testng.internal.Parameters.createParameters(Parameters.java:361)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:451)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1287)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1004)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1093)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- run -->
+        <test-method status="FAIL" signature="setBrowser()[pri:0, instance:WriteABrowser@12843fce]" name="setBrowser" duration-ms="0" started-at="2017-11-03T11:37:03Z" finished-at="2017-11-03T11:37:03Z">
+          <exception class="java.io.FileNotFoundException">
+            <message>
+              <![CDATA[browserFile (The system cannot find the file specified)]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.io.FileNotFoundException: browserFile (The system cannot find the file specified)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileReader.<init>(Unknown Source)
+	at org.nng.utils.Files.readFile(Files.java:57)
+	at WriteABrowser.setBrowser(WriteABrowser.java:24)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:648)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:834)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1142)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:124)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:771)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:357)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:352)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:310)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:259)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1176)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1101)
+	at org.testng.TestNG.run(TestNG.java:1009)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.io.FileNotFoundException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setBrowser -->
+      </class> <!-- WriteABrowser -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

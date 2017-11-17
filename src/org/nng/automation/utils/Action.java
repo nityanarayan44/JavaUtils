@@ -296,4 +296,14 @@ public class Action {
 				return (webDriver.findElements(By.xpath(elementIdentifier)).size());
 			}
 			
+		/*
+		 * =========================================
+		 * JavaScript Injection in WebDriver
+		 * -----------------------------------------
+		 * [ Provide some function, for few known ]
+		 * [ javaScript functionality to driver ]
+		 * -----------------------------------------
+		 * Implementation goes here....
+		 */
+			
 } /* End of class */

@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -33,7 +34,7 @@ public class Driver {
 	//=============================================================
 	// Variables
 	//=============================================================
-		private WebDriver driver 					= null;
+		public WebDriver driver 					= null;
 		private DesiredCapabilities capabilities 	= null;
 		private ChromeOptions options				= null;
 		private String browserName					= null;
@@ -63,31 +64,40 @@ public class Driver {
 	 * Distructor
 	 * -----------------------
 	 */
-		@Override
-		protected void finalize() throws Throwable {
-			//super.finalize();
-			//System.out.println(">>> Closing and Quiting current driver object.");
-			//this.closeDriver();
-			this.quitDriver();
-		}
+		//		@Override
+		//		protected void finalize() throws Throwable {
+		//			//super.finalize();
+		//			//System.out.println(">>> Closing and Quiting current driver object.");
+		//			//this.closeDriver();
+		//			this.quitDriver();
+		//		}
 		
 	//=============================================================
 	// Functions [Main]
 	//=============================================================
 		
+		// Check for null driver.
+		private boolean checkDriver(WebDriver d) {
+			if (d.equals(null)) 
+				return false;
+			else 
+				return true;
+		}
 		
 		// Get a Web driver, [with no args]
-		public WebDriver getWebDriver(String browserName, String driverPath) {
+		public WebDriver getWebDriver(String browserName, String driverPath) throws Exception {
 			if(this.setProperty(browserName, driverPath)) { 
 				this.setDriver(browserName); 
 				this.initDriver(browserName);
 			}
 			else this.driver = null;
+			
 			// Return webdriver
-			return this.driver;
+			if (this.checkDriver(this.driver)) { return this.driver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
+		
 		// Get a Web driver, [with chromeOptions]		
-		public WebDriver getWebDriver(String browserName, String driverPath, ChromeOptions chromeOptions) {
+		public WebDriver getWebDriver(String browserName, String driverPath, ChromeOptions chromeOptions) throws Exception {
 			if(this.setProperty(browserName, driverPath)) { 
 				this.setDriver(browserName);
 				this.setChromeOptions(chromeOptions);
@@ -95,11 +105,11 @@ public class Driver {
 			}
 			else this.driver = null;
 			// Return webdriver
-			return this.driver;
+			if (this.checkDriver(this.driver)) { return this.driver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
 
 		// Get a Web driver, [with desired capabilities]
-		public WebDriver getWebDriver(String browserName, String driverPath, DesiredCapabilities capabilities) {
+		public WebDriver getWebDriver(String browserName, String driverPath, DesiredCapabilities capabilities) throws Exception {
 			if(this.setProperty(browserName, driverPath)) { 
 				this.setDriver(browserName);
 				this.setDesiredCapabilites(capabilities);
@@ -107,7 +117,7 @@ public class Driver {
 			}
 			else this.driver = null;
 			// Return webdriver
-			return this.driver;
+			if (this.checkDriver(this.driver)) { return this.driver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
 		
 		/*
@@ -146,6 +156,12 @@ public class Driver {
 		 * Driver Native functions
 		 * ------------------
 		 */
+			
+			// maximize the driver window.
+			public void maximizeBrowser() throws Exception {
+				this.driver.manage().window().maximize();
+				return;
+			}
 			//Get the Browser Name for this driver object
 			public String getBrowserName() {
 				return this.browserName;
@@ -266,7 +282,11 @@ public class Driver {
 					// Edge browser
 					//----------------------------------------------------------------
 					private void initEdge() {
-						driver = new EdgeDriver();
+						DesiredCapabilities capabilities = DesiredCapabilities.edge();
+						EdgeOptions options = new EdgeOptions();
+						
+						//capabilities.setCapability(, value);
+						driver = new EdgeDriver(options);
 					}
 					private void initEdgeWithDesiredCapabilities( DesiredCapabilities capabilities) {
 						driver = new EdgeDriver(capabilities);
@@ -275,10 +295,17 @@ public class Driver {
 					// IE browser
 					//----------------------------------------------------------------
 					private void initIE() {
-						
+						//setting Default capability
+						DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+						capabilities.setCapability(InternetExplorerDriver.NATIVE_EVENTS, false);
+						capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+						capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
+						capabilities.setCapability("allow-blocked-content", true);
+						capabilities.setCapability("allowBlockedContent", true);
+						driver = new InternetExplorerDriver(capabilities);
 					}
 					private void initIEWithDesiredCapabilities( DesiredCapabilities capabilities) {
-						
+						driver = new InternetExplorerDriver(capabilities);
 					}
 		/*
 		 * =========================================
