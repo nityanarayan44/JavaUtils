@@ -13,6 +13,7 @@
 package org.nng.automation.utils;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -169,12 +170,36 @@ public class Driver {
 			
 			// Close the current driver
 			public void closeDriver() {
-				this.driver.close();
+				// Fix: #1 [IE is not supporting the driver.close functionality.]
+				if(this.browserName.toLowerCase().equals("ie")) {
+					try {
+						 Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+					} catch (IOException e) {
+						System.out.println("+--------------------------------------------+");
+						System.out.println("| Problem in closing the IE driver object... |");
+						System.out.println("+--------------------------------------------+");
+						e.printStackTrace();
+					}
+				} else {
+					this.driver.close();
+				}
 			}
 			
 			//Quit the current driver
 			public void quitDriver() {
-				this.driver.quit();
+				// Fix: #1 [IE is not supporting the driver.quit functionality.]
+				if(this.browserName.toLowerCase().equals("ie")) {
+					try {
+						 Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+					} catch (IOException e) {
+						System.out.println("+--------------------------------------------+");
+						System.out.println("| Problem in Quiting the IE driver object... |");
+						System.out.println("+--------------------------------------------+");
+						e.printStackTrace();
+					}
+				} else {
+					this.driver.quit();
+				}
 			}
 		
 	//=============================================================
