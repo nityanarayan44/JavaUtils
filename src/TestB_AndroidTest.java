@@ -13,6 +13,7 @@
 
 import org.testng.annotations.Test;
 
+import io.appium.java_client.android.AndroidKeyCode;
 import junit.framework.Assert;
 
 import org.testng.annotations.BeforeClass;
@@ -76,6 +77,14 @@ public class TestB_AndroidTest {
 			// click on equals
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/eq']")).click();
 				
+		// Direct Operation.
+				this.driver.androidDriver.findElement(By.xpath("//android.widget.TextView[@resource-id='com.android.calculator2:id/formula']")).sendKeys("1+cos(-45)");
+				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/eq']")).click();
+				//com.android.calculator2:id/formula
+				
+		// Do something extra. after this operation
+				//this.driver.androidDriver.closeApp();
+				
 		// Wait to exit
 			Thread.sleep(5000);  
 			return;
@@ -105,7 +114,7 @@ public class TestB_AndroidTest {
 	  @AfterClass
 	  public void afterClass() throws Exception {
 		  System.out.println("Test Executed.");
-		  driver.androidDriver.quit();
+		  //driver.androidDriver.quit();
 	  }
 
 }
