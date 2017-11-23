@@ -1,5 +1,5 @@
 /**
- * @author Ashutosh Mishra
+ * @author Ashutosh Mishra [@github: nityanarayan44]
  * @import org.nng.automation.utils.*; [Driver, Action]
  * @Desc:
  * Implements the AndroidDriver.
@@ -65,6 +65,15 @@ public class TestB_AndroidTest {
 			// choose a number to get its cos value.
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_9']")).click();
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_0']")).click();
+			// again swipe to get the bracket
+				this.driver.androidDriver.swipe( 1020, 695, 30, 265, 10);
+			// closing bracket.	
+				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/rparen']")).click();
+			// 
+				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_7']")).click();
+				Thread.sleep(3000);
+				
+			// click on equals
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/eq']")).click();
 				
 		// Wait to exit
