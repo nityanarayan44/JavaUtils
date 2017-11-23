@@ -14,6 +14,10 @@ package org.nng.automation.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.security.InvalidParameterException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -23,19 +27,23 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+//import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 
-@SuppressWarnings("unused")
+//For Appium's AndroidDriver
+import io.appium.java_client.android.AndroidDriver;
+
+@SuppressWarnings({"unused", "rawtypes"})
 public class Driver {
 	
 	//=============================================================
 	// Variables
 	//=============================================================
-		public WebDriver driver 					= null;
+		public AndroidDriver androidDriver			= null;
+		public WebDriver webDriver 					= null;
 		private DesiredCapabilities capabilities 	= null;
 		private ChromeOptions options				= null;
 		private String browserName					= null;
@@ -60,6 +68,9 @@ public class Driver {
 		public String APP 				= "";									//In case if we want to load an android application from a given location.
 		public String UDID				= "";
 		
+		// Default desiredCapability for Android
+		private Map<String, String> androidOptions = new HashMap<String, String>();
+		
 	/*
 	 * -----------------------
 	 * Distructor
@@ -74,7 +85,7 @@ public class Driver {
 		//		}
 		
 	//=============================================================
-	// Functions [Main]
+	// Functions to initiate the driver [Main]
 	//=============================================================
 		
 		// Check for null driver.
@@ -91,10 +102,10 @@ public class Driver {
 				this.setDriver(browserName); 
 				this.initDriver(browserName);
 			}
-			else this.driver = null;
+			else this.webDriver = null;
 			
 			// Return webdriver
-			if (this.checkDriver(this.driver)) { return this.driver; } else { throw new NullPointerException("Problem in driver creation"); }
+			if (this.checkDriver(this.webDriver)) { return this.webDriver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
 		
 		// Get a Web driver, [with chromeOptions]		
@@ -104,9 +115,9 @@ public class Driver {
 				this.setChromeOptions(chromeOptions);
 				this.initDriver(browserName+"_With_Options");
 			}
-			else this.driver = null;
+			else this.webDriver = null;
 			// Return webdriver
-			if (this.checkDriver(this.driver)) { return this.driver; } else { throw new NullPointerException("Problem in driver creation"); }
+			if (this.checkDriver(this.webDriver)) { return this.webDriver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
 
 		// Get a Web driver, [with desired capabilities]
@@ -116,15 +127,27 @@ public class Driver {
 				this.setDesiredCapabilites(capabilities);
 				this.initDriver(browserName+"_With_Capabilities");
 			}
-			else this.driver = null;
+			else this.webDriver = null;
 			// Return webdriver
-			if (this.checkDriver(this.driver)) { return this.driver; } else { throw new NullPointerException("Problem in driver creation"); }
+			if (this.checkDriver(this.webDriver)) { return this.webDriver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
 		
-		/*
-		 * get the default chromeOption and desiredCapabilities
-		 * ------------------------------------------------------
-		 */
+		//get the Android Driver
+		public AndroidDriver getAndroidDriver(Map<String, String> optionForAndroid) throws Exception {
+			if(!optionForAndroid.equals(null)) {
+				this.initAndroidDriver(optionForAndroid.get("url"), this.getCapabilitiesForAndroidDriver(optionForAndroid));
+			} else {
+				throw new InvalidParameterException("Passed parameter can not be null.");
+			}
+			return this.androidDriver;
+		}
+			
+		
+	/*
+	 * ------------------------------------------------------
+	 * get the default desiredCapabilities OR chromeOption
+	 * ------------------------------------------------------
+	 */
 			public ChromeOptions getdefaultChromeOption() {
 				this.options = new ChromeOptions();
 				for(String flag : this.defaultChromeOptions)
@@ -152,17 +175,54 @@ public class Driver {
 				this.capabilities = DesiredCapabilities.edge();
 				return this.capabilities;
 			}
+			
+			//-----------------------------------------------------------
+			// Android Driver default capabilities [as per this framework: Targeting 7.1.1 Android Nougat]
+			//-----------------------------------------------------------
+			public DesiredCapabilities getDefaultCapabilitesForAndroidDriver() throws Exception {
+				// Initialize the capability
+					this.capabilities = new DesiredCapabilities();
+				// Assigning the passed options as capabilities.
+					this.capabilities.setCapability("platformName", 	this.PLATFORM_NAME);
+					this.capabilities.setCapability("deviceName", 		this.DEVICE_NAME);
+					this.capabilities.setCapability("platformVersion", 	this.PLATFORM_VERSION);
+					this.capabilities.setCapability("appPackage", 		this.APP_PACKAGE);
+					this.capabilities.setCapability("appActivity", 		this.APP_ACTIVITY);
+				// Returning
+					return this.capabilities;
+			}
+			
+			public DesiredCapabilities getCapabilitiesForAndroidDriver(Map<String, String> opt) throws Exception {
+				// Initialize the capability
+				this.capabilities = new DesiredCapabilities();
+				// Assigning the passed options as capabilities.
+				for(String key : opt.keySet()) {
+					if(!key.equalsIgnoreCase("url")) {
+						this.capabilities.setCapability(key, opt.get(key));
+						System.out.println("Key= " + key + ", Value= " + opt.get(key));
+					}
+				}
+				return this.capabilities;
+			}
 		
 		/*
+		 * ------------------------------------------------------
 		 * Driver Native functions
-		 * ------------------
+		 * ------------------------------------------------------
 		 */
+			
+			// Open an given address.
+			public void open(String address) throws Exception {
+				this.webDriver.get(address);
+				return;
+			}
 			
 			// maximize the driver window.
 			public void maximizeBrowser() throws Exception {
-				this.driver.manage().window().maximize();
+				this.webDriver.manage().window().maximize();
 				return;
 			}
+			
 			//Get the Browser Name for this driver object
 			public String getBrowserName() {
 				return this.browserName;
@@ -173,7 +233,9 @@ public class Driver {
 				// Fix: #1 [IE is not supporting the driver.close functionality.]
 				if(this.browserName.toLowerCase().equals("ie")) {
 					try {
-						 Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+						System.out.println("Executing the commandline to kill IEDriver");
+						Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+						System.out.println( "Avaiable: " + Runtime.getRuntime().freeMemory() / 1024 + ", Total: " + (Runtime.getRuntime().totalMemory()) / (1024));
 					} catch (IOException e) {
 						System.out.println("+--------------------------------------------+");
 						System.out.println("| Problem in closing the IE driver object... |");
@@ -181,7 +243,7 @@ public class Driver {
 						e.printStackTrace();
 					}
 				} else {
-					this.driver.close();
+					this.webDriver.close();
 				}
 			}
 			
@@ -190,15 +252,19 @@ public class Driver {
 				// Fix: #1 [IE is not supporting the driver.quit functionality.]
 				if(this.browserName.toLowerCase().equals("ie")) {
 					try {
-						 Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+						System.out.println("Executing the commandline to kill IEDriver");
+						Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+						System.out.println( "Free: " + Runtime.getRuntime().freeMemory() / 1024 + ", Total: " + (Runtime.getRuntime().totalMemory()) / (1024));
 					} catch (IOException e) {
 						System.out.println("+--------------------------------------------+");
 						System.out.println("| Problem in Quiting the IE driver object... |");
 						System.out.println("+--------------------------------------------+");
 						e.printStackTrace();
 					}
+				} else if (this.androidDriver != null) {
+						this.androidDriver.quit();
 				} else {
-					this.driver.quit();
+						this.webDriver.quit();
 				}
 			}
 		
@@ -280,28 +346,28 @@ public class Driver {
 					// Chrome browser
 					//----------------------------------------------------------------
 					private void initChrome() {
-						this.driver = new ChromeDriver();
+						this.webDriver = new ChromeDriver();
 					}
 					private void initChromeIncognito() {
-						this.driver = new ChromeDriver();
+						this.webDriver = new ChromeDriver();
 					}
 					private void initChromeWithOptions(ChromeOptions options) {
-						this.driver = new ChromeDriver(options);
+						this.webDriver = new ChromeDriver(options);
 					}
 					private void initChromeWithDesiredCapabilities( DesiredCapabilities capabilities) {
-						this.driver = new ChromeDriver(capabilities);
+						this.webDriver = new ChromeDriver(capabilities);
 					}
 					
 					// Firefox browser
 					//----------------------------------------------------------------
 					private void initFirefox() {
-						this.driver = new FirefoxDriver();
+						this.webDriver = new FirefoxDriver();
 					}
 					private void initFirefoxIncognito() {
-						this.driver = new FirefoxDriver();
+						this.webDriver = new FirefoxDriver();
 					}
 					private void initFirefoxWithDesiredCapabilities( DesiredCapabilities capabilities) {
-						this.driver = new FirefoxDriver( capabilities );
+						this.webDriver = new FirefoxDriver( capabilities );
 					}
 			
 					// Edge browser
@@ -311,10 +377,10 @@ public class Driver {
 						EdgeOptions options = new EdgeOptions();
 						
 						//capabilities.setCapability(, value);
-						driver = new EdgeDriver(options);
+						this.webDriver = new EdgeDriver(options);
 					}
 					private void initEdgeWithDesiredCapabilities( DesiredCapabilities capabilities) {
-						driver = new EdgeDriver(capabilities);
+						this.webDriver = new EdgeDriver(capabilities);
 					}
 					
 					// IE browser
@@ -327,10 +393,10 @@ public class Driver {
 						capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
 						capabilities.setCapability("allow-blocked-content", true);
 						capabilities.setCapability("allowBlockedContent", true);
-						driver = new InternetExplorerDriver(capabilities);
+						this.webDriver = new InternetExplorerDriver(capabilities);
 					}
 					private void initIEWithDesiredCapabilities( DesiredCapabilities capabilities) {
-						driver = new InternetExplorerDriver(capabilities);
+						this.webDriver = new InternetExplorerDriver(capabilities);
 					}
 		/*
 		 * =========================================
@@ -340,6 +406,12 @@ public class Driver {
 		 * [ ANDROID | IPHONE | SELENIUM_RC ]
 		 * -----------------------------------------
 		 */
-				
+					//----------------------------------------------------------------
+					// Appium Android Driver
+					//----------------------------------------------------------------
+					private void initAndroidDriver(String url, DesiredCapabilities capability) throws Exception {
+						this.androidDriver = new AndroidDriver(new URL(url), capability);
+						return;
+					}
 			
 } /* End of Class */
