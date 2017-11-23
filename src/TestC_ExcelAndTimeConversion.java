@@ -11,7 +11,7 @@ import org.nng.utils.Excel;
 import org.nng.utils.Conversion;
 import static java.nio.charset.StandardCharsets.*;
 
-public class Examples {
+public class TestC_ExcelAndTimeConversion {
 
 	/*
 	 * =================================
@@ -19,18 +19,12 @@ public class Examples {
 	 * =================================
 	 */
 		public static void main(String[] args) throws Exception {
-			Examples example = new Examples();	
+			TestC_ExcelAndTimeConversion example = new TestC_ExcelAndTimeConversion();	
+			// Time Conversion : org.nng.utils package
+			example.conversion();
 			
-			String myString = "chrome";
-			byte[] ptext = myString.getBytes(ISO_8859_1); 
-			String value = new String(ptext, UTF_8);
-			 System.out.println(">>> " + value);
-			 
-			// Implementing Excel Utility
+			// Excel File : org.nng.utils package
 			//example.excelExample();
-			//myString.compareTo("");
-			// Implementing TimeUnit Conversion
-			//example.conversion();
 		}
 	
 	/*
