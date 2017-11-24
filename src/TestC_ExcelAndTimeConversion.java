@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import org.nng.utils.Excel;
-import org.nng.utils.Conversion;
+import org.nng.utils.*;
 
 public class TestC_ExcelAndTimeConversion {
 
@@ -22,11 +22,12 @@ public class TestC_ExcelAndTimeConversion {
 		public static void main(String[] args) throws Exception {
 			TestC_ExcelAndTimeConversion example = new TestC_ExcelAndTimeConversion();
 			if(args.length == 0) {
-				example.help();
+				System.out.println( "Current Date : " + (new DateAndTime()).getCurrentDateAsD_M_Y());
+				//example.help();
 			}else {	
 				// Time Conversion : org.nng.utils package
-				example.conversion();
-			
+				//example.conversion();
+				System.out.println( "Current Date : " + (new DateAndTime()).getCurrentDateAsD_M_Y());
 				// Excel File : org.nng.utils package
 				//example.excelExample();
 			}
