@@ -13,7 +13,6 @@
 
 import org.testng.annotations.Test;
 
-import io.appium.java_client.android.AndroidKeyCode;
 import junit.framework.Assert;
 
 import org.testng.annotations.BeforeClass;

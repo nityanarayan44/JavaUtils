@@ -257,21 +257,25 @@ public class Action {
 		 * Native functions for/On WebDriver
 		 * -----------------------------------
 		 */
+			//TODO: Need to change it to function => setValue(WebDriver, findBy, identifier, value)
 			public void setElementValue(WebDriver webDriver, String findBy, String elementIdentifier, String value) throws Exception {
 				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				element.sendKeys(value);
 			}
 			
+			//TODO: Need to change it to function => setValue(WebDriver, findBy, identifier, value)
 			public void setElementValue(WebDriver webDriver, String findBy, String elementIdentifier, Keys keyValue) throws Exception {
 				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				element.sendKeys(keyValue);
 			}
 			
+			//TODO: Need to change it to function => getValue(WebDriver, findBy, identifier)
 			public String getElementValue(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
 				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.getText().toString();
 			}
 			
+			//TODO: Need to change it to function => getValue(WebDriver, findBy, identifier)
 			public String getElementValue(WebDriver webDriver, String findBy, String elementIdentifier, String valueType) throws Exception {
 				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				switch(valueType.toUpperCase()) {
@@ -282,11 +286,13 @@ public class Action {
 				return element.getText().toString();
 			}
 			
+			//TODO: Need to change it to function => getValueByProperty(WebDriver, findBy, identifier)
 			public String getElementValueByProperty(WebDriver webDriver, String findBy, String elementIdentifier, String property) throws Exception {
 				WebElement element=this.findElement(webDriver, findBy, elementIdentifier);
 				return element.getAttribute(property).toString();
 			}
 			
+			//TODO: Need to change it to function => clearValue(WebDriver, findBy, identifier)
 			public void clearElementValue(WebDriver webDriver, String findBy, String elementIdentifier) throws Exception {
 				WebElement element = this.findElement(webDriver, findBy, elementIdentifier);
 				element.clear();
@@ -297,6 +303,7 @@ public class Action {
 			}
 			
 		/*
+		 * [NNG]
 		 * =========================================
 		 * JavaScript Injection in WebDriver
 		 * -----------------------------------------
@@ -304,6 +311,13 @@ public class Action {
 		 * [ javaScript functionality to driver ]
 		 * -----------------------------------------
 		 * Implementation goes here....
+		 * Listing of injection:
+		 * 1- Set visibility a Web Element
+		 * 2- Set value of a Web Element
+		 * 3- Getting the innerText
+		 * 4- Getting the innerHTML
+		 * 5- clicking on an WebElement
+		 * 6- Injecting a vanilla JavaScript code in to webDriver
 		 */
 			
 } /* End of class */
