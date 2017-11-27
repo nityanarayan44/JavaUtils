@@ -30,7 +30,6 @@ public class TestE_AppiumDriver {
 	 *-| Test [MobileWebBrowser]	|-
 	 * ==============================
 	 */
-	  @SuppressWarnings("deprecation")
 	  @Test (priority = 1, enabled = true)
 	  public void f() throws Exception {
 		  	// Open an address
@@ -65,14 +64,15 @@ public class TestE_AppiumDriver {
 		   * */
 		  	driver = new Driver();
 			Map<String, String> opt = new HashMap<String, String>();
-			opt.put("url", 				"http://127.0.0.1:4723/wd/hub/");
-			opt.put("platformName", 	"Android");
-			opt.put("platformVersion", 	"7.0");
-			opt.put("deviceName", 		"ZY2242RDQX");
-			opt.put(MobileCapabilityType.BROWSER_NAME, "Chrome");
-			// Browser Application
-			//opt.put("appPackage", 		"com.android.chrome");
-			//opt.put("appActivity",		"com.google.android.apps.chrome.Main");
+			opt.put("url", 	"http://127.0.0.1:4723/wd/hub/");
+			opt.put(MobileCapabilityType.PLATFORM_NAME, 	"Android");
+			opt.put(MobileCapabilityType.PLATFORM_VERSION, 	"7.0");
+			opt.put(MobileCapabilityType.DEVICE_NAME, 		"ZY2242RDQX");
+			opt.put(MobileCapabilityType.BROWSER_NAME,		"Chrome");
+			
+			// Setting up Browser Application
+				//opt.put("appPackage", 		"com.android.chrome");
+				//opt.put("appActivity",		"com.google.android.apps.chrome.Main");
 			
 			
 			//this.driver.getRemoteDriver(opt);
