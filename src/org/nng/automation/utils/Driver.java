@@ -31,6 +31,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 
 //For Appium's AndroidDriver
@@ -140,6 +141,16 @@ public class Driver {
 				throw new InvalidParameterException("Passed parameter can not be null.");
 			}
 			return this.androidDriver;
+		}
+		
+		//Get the Remote webdriver {e.g. Android Chrome driver}
+		public WebDriver getRemoteDriver (Map<String, String> optionForAndroid) throws Exception {
+			if(!optionForAndroid.equals(null)) {
+				this.initRemoteDriver(optionForAndroid.get("url"), this.getCapabilitiesForAndroidDriver(optionForAndroid));
+			} else {
+				throw new InvalidParameterException("Passed parameter can not be null.");
+			}
+			return this.webDriver;
 		}
 			
 		
@@ -414,4 +425,11 @@ public class Driver {
 						return;
 					}
 			
+					//----------------------------------------------------------------
+					// Remote WebDriver [Android Chrome, or other network web driver]
+					//----------------------------------------------------------------
+					private void initRemoteDriver(String url, DesiredCapabilities capability) throws Exception {
+						this.webDriver = new RemoteWebDriver(new URL(url), capability);
+						return;
+					}
 } /* End of Class */

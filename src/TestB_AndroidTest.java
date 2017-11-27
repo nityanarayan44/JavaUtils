@@ -96,17 +96,29 @@ public class TestB_AndroidTest {
 	  
 	  @BeforeClass
 	  public void beforeClass() throws Exception {
+		  /*
+		   * Mandatory capability for android
+		   * 1- DeviceName
+		   * 2- PlatformName
+		   * 3- udid
+		   * */
 		  	driver = new Driver();
 			Map<String, String> opt = new HashMap<String, String>();
 			opt.put("url", 				"http://127.0.0.1:4723/wd/hub/");
 			opt.put("platformName", 	"Android");
-			opt.put("platformVersion", 	"8.0.0");
-			opt.put("deviceName", 		"emulator-5554");
+			opt.put("platformVersion", 	"7.0");
+			opt.put("deviceName", 		"Android");
+			
 			opt.put("appPackage", 		"com.android.calculator2");
 			opt.put("appActivity",		"com.android.calculator2.Calculator");
-			opt.put("autoGrantPermissions","true"); // Automatically grant the permission. No popups
+			//opt.put("autoGrantPermissions","true"); // Automatically grant the permission. No popups
+			
+			//opt.put("appPackage", 		"com.android.chrome");
+			//opt.put("appActivity",		"com.google.android.apps.chrome.Main");
 			
 			this.driver.getAndroidDriver(opt);
+			//this.driver.getRemoteDriver(opt);
+			
 			return;
 	  }
 	
