@@ -24,14 +24,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestD_RemoteWebDriverTest {
-	// Global
+
+	/* 
+	 * +====================================+
+	 * | Global Instance					|
+	 * +====================================+
+	 */
 		public Driver driver ;
 	
-	/* ==============================
-	 *-| Test						|-
-	 * ==============================
+	/* 
+	 * +====================================+
+	 * | Test [Test with MobileWebBrowser]	|
+	 * | Your Test Goes here....			|			
+	 * +====================================+
 	 */
-	  @SuppressWarnings("deprecation")
 	  @Test (priority = 1, enabled = true)
 	  public void f() throws Exception {
 		// Wait
@@ -99,10 +105,13 @@ public class TestD_RemoteWebDriverTest {
 			return;
 	  }
  
-	/* ==============================
-	 *-| TestNG Configurations		|-
-	 * ==============================
+	/* 
+	 * +============================================+
+	 * | TestNG Configuration Settings				|
+	 * | Just for Initialization and finalization 	|
+	 * +============================================+
 	 */
+
 	  
 	  @BeforeClass
 	  public void beforeClass() throws Exception {

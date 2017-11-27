@@ -25,30 +25,32 @@ import java.util.Map;
 public class TestE_AppiumDriver {
 
 	/* 
-	 * ======================================
-	 *-| Global Instance			|-
-	 * ======================================
+	 * +====================================+
+	 * | Global Instance					|
+	 * +====================================+
 	 */
 		public Driver driver ;	
 	
-	/* Your Test Goes here....
-	 * ======================================
-	 *-| Test [Test with MobileWebBrowser]	|-
-	 * ======================================
+	/* 
+	 * +====================================+
+	 * | Test [Test with MobileWebBrowser]	|
+	 * | Your Test Goes here....			|			
+	 * +====================================+
 	 */
 	  @Test (priority = 1, enabled = true)
 	  public void f() throws Exception {
-		  	// Open an address
-				this.driver.appiumDriver.get("https://www.google.co.in");
+		// Open an address
+			this.driver.appiumDriver.get("https://www.google.co.in");
+		
+		// Wait for few seconds.
+			Thread.sleep(3000);
 			
-			// Wait for few seconds.
-				Thread.sleep(3000);
-				
-			// Search Something
-				this.driver.appiumDriver.findElement(By.name("q")).sendKeys("This is a Search String" + Keys.ENTER);
-				
-			// Printout the page source:
-				System.out.println( "\n\n\n SRC >> \n\n" + this.driver.appiumDriver.getPageSource()) ;
+		// Search Something
+			this.driver.appiumDriver.findElement(By.name("q")).sendKeys("This is a Search String" + Keys.ENTER);
+			
+		// Printout the page source:
+			System.out.println( "\n\n\n SRC >> \n\n" + this.driver.appiumDriver.getPageSource()) ;
+			
 		// Last
 		// Wait to exit
 			Thread.sleep(1000);
@@ -56,10 +58,10 @@ public class TestE_AppiumDriver {
 	  }
  
 	/* 
-	 * Configuration Settings [ Just for Initialization and finalization]
-	 * ==============================
-	 *-| TestNG Configurations	|-
-	 * ==============================
+	 * +============================================+
+	 * | TestNG Configuration Settings				|
+	 * | Just for Initialization and finalization 	|
+	 * +============================================+
 	 */
 	  
 	  @BeforeClass
