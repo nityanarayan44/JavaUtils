@@ -23,12 +23,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TestE_AppiumDriver {
-	// Global
-		public Driver driver ;
+
+	/* 
+	 * ======================================
+	 *-| Global Instance			|-
+	 * ======================================
+	 */
+		public Driver driver ;	
 	
-	/* ==============================
-	 *-| Test [MobileWebBrowser]	|-
-	 * ==============================
+	/* Your Test Goes here....
+	 * ======================================
+	 *-| Test [Test with MobileWebBrowser]	|-
+	 * ======================================
 	 */
 	  @SuppressWarnings("deprecation")
 	  @Test (priority = 1, enabled = true)
@@ -50,8 +56,10 @@ public class TestE_AppiumDriver {
 			return;
 	  }
  
-	/* ==============================
-	 *-| TestNG Configurations		|-
+	/* 
+	 * Configuration Settings [ Just for Initialization and finalization]
+	 * ==============================
+	 *-| TestNG Configurations	|-
 	 * ==============================
 	 */
 	  
