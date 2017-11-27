@@ -34,6 +34,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 
+import io.appium.java_client.AppiumDriver;
 //For Appium's AndroidDriver
 import io.appium.java_client.android.AndroidDriver;
 
@@ -44,6 +45,7 @@ public class Driver {
 	// Variables
 	//=============================================================
 		public AndroidDriver androidDriver			= null;
+		public AppiumDriver appiumDriver			= null;
 		public WebDriver webDriver 					= null;
 		private DesiredCapabilities capabilities 	= null;
 		private ChromeOptions options				= null;
@@ -133,7 +135,7 @@ public class Driver {
 			if (this.checkDriver(this.webDriver)) { return this.webDriver; } else { throw new NullPointerException("Problem in driver creation"); }
 		}
 		
-		//get the Android Driver
+		// get the Android Driver
 		public AndroidDriver getAndroidDriver(Map<String, String> optionForAndroid) throws Exception {
 			if(!optionForAndroid.equals(null)) {
 				this.initAndroidDriver(optionForAndroid.get("url"), this.getCapabilitiesForAndroidDriver(optionForAndroid));
@@ -143,7 +145,7 @@ public class Driver {
 			return this.androidDriver;
 		}
 		
-		//Get the Remote webdriver {e.g. Android Chrome driver}
+		// Get the Remote webdriver {e.g. Android Chrome driver}
 		public WebDriver getRemoteDriver (Map<String, String> optionForAndroid) throws Exception {
 			if(!optionForAndroid.equals(null)) {
 				this.initRemoteDriver(optionForAndroid.get("url"), this.getCapabilitiesForAndroidDriver(optionForAndroid));
@@ -152,7 +154,16 @@ public class Driver {
 			}
 			return this.webDriver;
 		}
-			
+		
+		// Get AppiumDriver
+		public WebDriver getAppiumDriver (Map<String, String> optionForAndroid) throws Exception {
+			if(!optionForAndroid.equals(null)) {
+				this.initAppiumDriver(optionForAndroid.get("url"), this.getCapabilitiesForAndroidDriver(optionForAndroid));
+			} else {
+				throw new InvalidParameterException("Passed parameter can not be null.");
+			}
+			return this.webDriver;
+		}
 		
 	/*
 	 * ------------------------------------------------------
@@ -430,6 +441,14 @@ public class Driver {
 					//----------------------------------------------------------------
 					private void initRemoteDriver(String url, DesiredCapabilities capability) throws Exception {
 						this.webDriver = new RemoteWebDriver(new URL(url), capability);
+						return;
+					}
+					
+					//----------------------------------------------------------------
+					// Appium WebDriver [Android Chrome, or other network web driver]
+					//----------------------------------------------------------------
+					private void initAppiumDriver(String url, DesiredCapabilities capability) throws Exception {
+						this.appiumDriver = new AppiumDriver(new URL(url), capability);
 						return;
 					}
 } /* End of Class */
