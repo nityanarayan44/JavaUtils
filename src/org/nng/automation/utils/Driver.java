@@ -62,7 +62,7 @@ public class Driver {
 		public String[] FirefoxDefaultCapabilities			= {""};
 		
 		// For remote server address
-		public String APPIUM_URL 		= "http://127.0.0.1:4723/wd/hub";		//Specific complete address, where appium server is running and listening 
+		public String APPIUM_URL 		= "http://127.0.0.1:4723/wd/hub/";		//Specific complete address, where appium server is running and listening 
 		public String PLATFORM_NAME 	= "Android";							//Specification of Mobile Platform either of "Android" || "iOS"
 		public String PLATFORM_VERSION 	= "7.1.1";								//Specification of Mobile platform version
 		public String DEVICE_NAME 		= "Android";							//Device Name.

@@ -51,6 +51,11 @@ public class TestE_AppiumDriver {
 		// Printout the page source:
 			System.out.println( "\n\n\n SRC >> \n\n" + this.driver.appiumDriver.getPageSource()) ;
 			
+			try {
+				//TODO
+			} finally {
+				//TODO
+			}
 		// Last
 		// Wait to exit
 			Thread.sleep(1000);
