@@ -15,8 +15,10 @@ public class Testing {
 		data.put("teststepStatus", "pId-100003");
 		data.put("teststepTime", "pId-100003");
 		
-		Reports report = new Reports("http://127.0.0.1:5000/nng/core/api/v1/sendTestData", "POST");
-		report.sendData( data );
+		Reports report = new Reports("http://127.0.0.1:10000/", "POST");
+		report.startTimeCapture();
+		System.out.println( " >>> " + report.sendData( data ) );
+		System.out.println(" Total Time: " + report.stopTimeCapture() + " milli seconds");
 		
 	}
 }

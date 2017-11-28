@@ -62,6 +62,10 @@ public class Reports {
 		// Logger
 		private Logger logger = Logger.getAnonymousLogger();
 		
+		// Extra
+		private long TimeStamp_t1 = 0;
+		private long TimeStamp_t2 = 0;
+		
 	/* 
 	 * +====================================+
 	 * | Constructors						|
@@ -228,7 +232,24 @@ public class Reports {
 	 * - Reports.generateXMLFile	[Generate the XML file from buffered data]
 	 * - Reports.generateHTMLFile	[Generate the HTML file from buffered data]
 	 */
-		public void sendData( HashMap<String, String> dataToSend) throws Exception {
+		// Capture current time-stamp
+		public void startTimeCapture() throws Exception {
+			this.TimeStamp_t1 = System.currentTimeMillis();
+			this.TimeStamp_t2 = 0;
+			return;
+		}
+		
+		// Returns the long time in mili seconds
+		public long stopTimeCapture() throws Exception {
+			if(this.TimeStamp_t1 != 0)
+				this.TimeStamp_t2 = System.currentTimeMillis() - this.TimeStamp_t1;
+			else
+				this.TimeStamp_t2 = -1;
+			
+			return this.TimeStamp_t2;
+		}
+		
+		public String sendData( HashMap<String, String> dataToSend) throws Exception {
 			
 			// Pack the Data
 				this.setJSONObjectData( dataToSend );
@@ -243,7 +264,7 @@ public class Reports {
 				
 			// Receiving the server response.
 				// Getting Response Status Code
-				this.RES_STATUS_CODE= this.httpConnection.getResponseCode() + "";
+				this.RES_STATUS_CODE= this.httpConnection.getResponseCode() + " ";
 				this.RES_MESSAGE 	= this.httpConnection.getResponseMessage();
 				
 				// Getting Response input Stream
@@ -262,18 +283,18 @@ public class Reports {
 			// Log the sent request
 				String stdout = "+--------------------\n"+
 								"| Request Sent:	  \n" + 
-								"| URL		: %30s    \n" +
-								"| METHOD	: %10     \n" +
+								"| URL		: %-30s    \n" +
+								"| METHOD	: %-10s     \n" +
 								"| DATA		: %s      \n" +
 								"+--------------------\n"+
 								"| RESPONSE RECEIVED: \n"+
-								"| STATUS CODE	: %10s\n"+
-								"| MESSAGE		: %s  \n"+
+								"| STATUS CODE : %-10s\n"+
+								"| MESSAGE     : %-50s  \n"+
 								"+--------------------\n\n";
 				System.out.printf(stdout, this.REQ_SERVER_URL, this.REQ_METHOD, data, this.RES_STATUS_CODE, this.RES_MESSAGE);
 			
 			// Last
-				return;
+				return this.RES_DATA;
 		}
 		
 		public void postTestData(File file, String testCaseName, String stepName, String stepStatus, String stepTime) throws Exception {
