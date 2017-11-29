@@ -1,15 +1,13 @@
 import org.nng.utils.Image;
 
-public class Image_MetaData {
+public class Sample_Image_MetaData {
 	
 	// Method
 	public static void main(String[] args) throws Exception {
 	
-		//= [Create the Class Object]
-			//TODO: Make this Image Class to Static
-			//Images img = new Images();
-			//String key = "url";
-			//String value= "https://www.google.co.in";
+		//String key = "url";
+		//String value= "https://www.google.co.in";
+		//String imageFilePath = "E:\\dump\\a.png";
 		
 		//= Set META Data
 			Image.setMetaData("url", "https://www.google.co.in", "E:\\dump\\a.png");
@@ -18,6 +16,6 @@ public class Image_MetaData {
 			String result = Image.getMetaData("url", "E:\\dump\\a.png");
 		
 		//= Logout the result
-			System.out.println("Value = " + result);
+			System.out.println("Image MetaData Key = 'url' and Value = " + result);
 	}
 }
