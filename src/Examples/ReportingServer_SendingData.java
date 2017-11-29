@@ -1,3 +1,4 @@
+package Examples;
 import java.util.HashMap;
 
 import org.nng.utils.Reports;

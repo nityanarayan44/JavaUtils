@@ -1,3 +1,4 @@
+package Examples;
 import org.nng.utils.Image;
 
 public class Sample_Image_MetaData {
