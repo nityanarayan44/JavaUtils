@@ -1,7 +1,13 @@
+/**
+ * @package org.nng.utils
+ * @author Ashutosh Mishra [@github: nityanarayan44]
+ * @desc Image MetaData Set and Get
+ * Currently Focused for PNG Type Image.
+ * 
+ */
 package org.nng.utils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
