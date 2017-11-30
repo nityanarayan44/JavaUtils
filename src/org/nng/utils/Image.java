@@ -35,9 +35,7 @@ public class Image {
 	 * | Objects and Variables						|
 	 * +============================================+
 	 */
-		public String filePath = null;
-		public static File in	= null;
-		public static File out = null;
+		//Nothing here
 	
 	/* 
 	 * +============================================+
@@ -100,8 +98,8 @@ public class Image {
 		public static void setMetaData(String metaKey, String metaValue, String filePath) throws IOException {
 		        
 			//=== [Set the image file for which we are going to set and get MetaData]
-			 	in = new File(filePath);
-		        out = new File(in.getParent(), createOutputName(in));
+			 	File in = new File(filePath);
+		        File out = new File(in.getParent(), createOutputName(in));
 		    //=== [Logout the output image path]
 		        //System.out.println("Output path: " + out.getAbsolutePath());
 		
@@ -131,14 +129,14 @@ public class Image {
 		public static String getMetaData(String metaKey, String filePath) throws IOException {
 		        
 			//=== [Set the image file for which we are going to set and get MetaData]
-			 	in = new File(filePath);
-		        out = new File(in.getParent(), createOutputName(in));
+			 	File in = new File(filePath);
+		        //File out = new File(in.getParent(), createOutputName(in));
 		    //=== [Logout the output image path]
 		        //System.out.println("Output path: " + out.getAbsolutePath());
 		
 		    //=== [Doing the Operation]
 		        String value = "";
-		        try (ImageInputStream input = ImageIO.createImageInputStream(out)) {
+		        try (ImageInputStream input = ImageIO.createImageInputStream(in)) {
 			        //= [Getting reader for image]
 		        	Iterator<ImageReader> readers = ImageIO.getImageReaders(input);
 			        ImageReader reader = readers.next(); // TODO: Validate that there are readers
@@ -147,7 +145,7 @@ public class Image {
 			        value = getTextEntry(reader.getImageMetadata(0), metaKey);
 			        //= [Logout the Value]
 			        //System.out.println("value: " + value);
-			        }
+			    }
 			//=== [Last]
 			    return value;
 		}

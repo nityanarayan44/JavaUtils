@@ -9,14 +9,19 @@ public class Sample_Image_MetaData {
 		//String key = "url";
 		//String value= "https://www.google.co.in";
 		//String imageFilePath = "E:\\dump\\a.png";
+		// BUG:
+		// If You Get the Exception :
+		// Exception in thread "main" java.lang.IllegalArgumentException: input == null!
+		// Then
+		// It means, the file @param that you are passing is either not accessible or does not exist.
 		
 		//= Set META Data
-			Image.setMetaData("url", "https://www.google.co.in", "E:\\dump\\a.png");
+			//Image.setMetaData("nng", "Nitya_Narayan_Gautam", "E:\\dump\\d.jpg");
 			
 		//= Get META Data
-			String result = Image.getMetaData("url", "E:\\dump\\a.png");
+			String result = Image.getMetaData("nng", "E:\\dump\\d.png");
 		
 		//= Logout the result
-			System.out.println("Image MetaData Key = 'url' and Value = " + result);
+			System.out.println("Image MetaData Key = 'nng' and Value = " + result);
 	}
 }
