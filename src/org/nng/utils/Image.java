@@ -130,7 +130,6 @@ public class Image {
 		        
 			//=== [Set the image file for which we are going to set and get MetaData]
 			 	File in = new File(filePath);
-		        //File out = new File(in.getParent(), createOutputName(in));
 		    //=== [Logout the output image path]
 		        //System.out.println("Output path: " + out.getAbsolutePath());
 		
@@ -143,10 +142,8 @@ public class Image {
 			        //= [Set the Image file to read the MetaData]
 			        reader.setInput(input);
 			        value = getTextEntry(reader.getImageMetadata(0), metaKey);
-			        //= [Logout the Value]
-			        //System.out.println("value: " + value);
 			    }
-			//=== [Last]
+			//=== [Return the value for the requested key]
 			    return value;
 		}
 

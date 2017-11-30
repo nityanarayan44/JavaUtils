@@ -13,9 +13,7 @@ package Examples;
  */
 
 import org.testng.annotations.Test;
-
 import junit.framework.Assert;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import org.nng.automation.utils.Driver;
@@ -25,6 +23,7 @@ import org.openqa.selenium.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("deprecation")
 public class TestB_AndroidTest {
 	/* 
 	 * +====================================+
@@ -41,7 +40,6 @@ public class TestB_AndroidTest {
 	 */
 
 		
-	  @SuppressWarnings("deprecation")
 	  @Test (priority = 1, enabled = true)
 	  public void f() throws Exception {
 		// Wait

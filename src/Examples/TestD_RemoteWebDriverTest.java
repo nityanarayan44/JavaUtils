@@ -18,9 +18,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import org.nng.automation.utils.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
