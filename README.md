@@ -15,7 +15,7 @@ This is all about a ready made framework solution for java applications. <br/>
     - Download the latest "org.nng-*.jar" file.
     - Simply Import the jar to your java project.
     - Use the class accordingly.
-    - For the Sample Code, Follow the ![Image for JavaUtils usage.](https://github.com/nityanarayan44/JavaUtils/tree/master/src/Examples "JavaUtils Sample Code")
+    - For the Sample Code, Follow the ![Example Code](https://github.com/nityanarayan44/JavaUtils/tree/master/src/Examples)
 - Customized way [Using and editing whole source code]
     - Fork this Project "https://github.com/nityanarayan44/JavaUtils", you can also clone it if you want keep it locally.
     - Setup the IDE for this Project [i have used Eclipse Oxygen].
