@@ -1,7 +1,7 @@
 /**
  * @author Ashutosh Mishra
  * @desc Set a main class for org.nng-*.jar
- * 
+ * edited
  */
 
 package Examples;
