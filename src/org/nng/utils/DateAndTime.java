@@ -38,28 +38,28 @@ public class DateAndTime {
 		
 		// Get Past date.
 		public static String getPreviousDateByDays(long forDays) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String previous_Date = dtf.format(localDate.minusDays(forDays));
 			return previous_Date;
 		}
 		
 		public static String getPreviousDateByMonths(long forMonths) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String previous_Date = dtf.format(localDate.minusMonths(forMonths));
 			return previous_Date;
 		}
 		
 		public static String getPreviousDateByWeeks(long forWeeks) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String previous_Date = dtf.format(localDate.minusWeeks(forWeeks));
 			return previous_Date;
 		}
 		
 		public static String getPreviousDateByYears(long forYears) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String previous_Date = dtf.format(localDate.minusYears(forYears));
 			return previous_Date;
@@ -67,28 +67,28 @@ public class DateAndTime {
 		
 		// Get future date.
 		public static String getFutureDateByDays(long forDays) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String future_Date = dtf.format(localDate.plusDays(forDays));
 			return future_Date;
 		}
 		
 		public static String getFutureDateByMonths(long forMonths) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String future_Date = dtf.format(localDate.plusMonths(forMonths));
 			return future_Date;
 		}
 		
 		public static String getFutureDateByWeeks(long forWeeks) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String future_Date = dtf.format(localDate.plusWeeks(forWeeks));
 			return future_Date;
 		}
 		
 		public static String getFutureDateByYears(long forYears) {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(this.defaultPattern);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(defaultPattern);
 			LocalDate localDate = LocalDate.now();
 			String future_Date = dtf.format(localDate.plusYears(forYears));
 			return future_Date;

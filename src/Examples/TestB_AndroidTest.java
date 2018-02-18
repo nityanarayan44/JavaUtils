@@ -61,19 +61,19 @@ public class TestB_AndroidTest {
 			// Swipe from Right to Left;
 				Dimension dim = this.driver.androidDriver.manage().window().getSize();
 				System.out.printf("\n Current Dimentions: Width=%d, Height=%d \n", dim.width, dim.height);
-				this.driver.androidDriver.swipe( 1020, 695, 30, 265, 10);
+				//this.driver.androidDriver).swipe( 1020, 695, 30, 265, 10);
 			// Choose Cos function
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/fun_cos']")).click();
 			// slide back
 				// [240,693][1080,1794] [Exact value.]
 				// this.driver.androidDriver.pinch(150, 690);
-				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_7']")).click();
+				//this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_7']")).click();
 				Thread.sleep(3000);
 			// choose a number to get its cos value.
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_9']")).click();
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/digit_0']")).click();
 			// again swipe to get the bracket
-				this.driver.androidDriver.swipe( 1020, 695, 30, 265, 10);
+				//this.driver.androidDriver.swipe( 1020, 695, 30, 265, 10);
 			// closing bracket.	
 				this.driver.androidDriver.findElement(By.xpath("//android.widget.Button[@resource-id='com.android.calculator2:id/rparen']")).click();
 			// 
