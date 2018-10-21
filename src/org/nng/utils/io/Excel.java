@@ -12,7 +12,7 @@
  *  TODO: Documentation of this class and functions.
  */
 
-package org.nng.utils;
+package org.nng.utils.io;
 
 import java.io.File;
 import java.io.FileInputStream;

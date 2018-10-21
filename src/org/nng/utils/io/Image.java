@@ -5,7 +5,7 @@
  * Currently Focused for PNG Type Image.
  * 
  */
-package org.nng.utils;
+package org.nng.utils.io;
 
 import java.io.File;
 import java.io.IOException;

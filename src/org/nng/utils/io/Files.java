@@ -1,7 +1,7 @@
 /*
  *  @Author: AShutosh Mishra
  */
-package org.nng.utils;
+package org.nng.utils.io;
 
 import java.io.BufferedReader;
 import java.io.File;

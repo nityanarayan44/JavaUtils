@@ -7,8 +7,9 @@ package Examples;
  */
 
 import java.util.List;
-import org.nng.utils.Excel;
+
 import org.nng.utils.*;
+import org.nng.utils.io.Excel;
 
 public class Sample_of_Excel_Conversion_Classes {
 

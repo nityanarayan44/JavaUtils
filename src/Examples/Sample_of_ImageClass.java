@@ -1,5 +1,5 @@
 package Examples;
-import org.nng.utils.Image;
+import org.nng.utils.io.Image;
 
 public class Sample_of_ImageClass {
 	
